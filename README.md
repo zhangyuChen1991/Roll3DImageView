@@ -2,20 +2,26 @@ Roll3DImageView
 ----
 #####简介
 >这是一个实现图片3D翻转的自定义view,包含四种3D翻转的效果以及一种2D平移效果。
+
 ####效果
 **2D平移：**
+
 ![](https://github.com/zhangyuChen1991/some_sources/blob/master/3DView/2d.gif)
 
 **3D翻转：**
+
 ![](https://github.com/zhangyuChen1991/some_sources/blob/master/3DView/whole3D.gif)
 
 **3D开合翻转：**
+
 ![](https://github.com/zhangyuChen1991/some_sources/blob/master/3DView/spe.gif)
 
 **百叶窗：**
+
 ![](https://github.com/zhangyuChen1991/some_sources/blob/master/3DView/byc.gif)
 
 **轮转效果：**
+
 ![](https://github.com/zhangyuChen1991/some_sources/blob/master/3DView/inturn.gif)
 
 
