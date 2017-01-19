@@ -48,7 +48,7 @@ Roll3DImageView
 
 
 ####实现原理
->
+>相关原理和实现过程请参见[这里](http://www.jianshu.com/p/e070fa69eb1d)
 
 
 
