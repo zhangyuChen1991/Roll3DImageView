@@ -168,13 +168,14 @@ public class Roll3DView extends View {
      * degree 0->90 往下翻滚或者往右翻滚
      *
      * @param canvas
+     * @param draw2D  是否画2D效果：true  画2D效果； false  画3D效果
      */
     private void drawRollWhole3D(Canvas canvas, boolean draw2D) {
 
         Bitmap currWholeBitmap = bitmapList.get(currIndex);
         Bitmap nextWholeBitmap = bitmapList.get(nextIndex);
         canvas.save();
-        //
+
         if (direction == 1) {
             camera.save();
             if (draw2D)
@@ -188,7 +189,6 @@ public class Roll3DView extends View {
             matrix.postTranslate(viewWidth / 2, axisY);
             canvas.drawBitmap(currWholeBitmap, matrix, paint);
 
-            //
             camera.save();
             if (draw2D)
                 camera.rotateX(0);
@@ -246,7 +246,7 @@ public class Roll3DView extends View {
 
             canvas.save();
             if (direction == 1) {
-                //
+
                 camera.save();
                 camera.rotateX(-rotateDegree);
                 camera.getMatrix(matrix);
@@ -256,7 +256,6 @@ public class Roll3DView extends View {
                 matrix.postTranslate(currBitmap.getWidth() / 2 + i * averageWidth, axisY);
                 canvas.drawBitmap(currBitmap, matrix, paint);
 
-                //
                 camera.save();
                 camera.rotateX((90 - rotateDegree));
                 camera.getMatrix(matrix);
@@ -276,7 +275,6 @@ public class Roll3DView extends View {
                 matrix.postTranslate(axisX, currBitmap.getHeight() / 2 + i * averageHeight);
                 canvas.drawBitmap(currBitmap, matrix, paint);
 
-                //
                 camera.save();
                 camera.rotateY(rotateDegree - 90);
                 camera.getMatrix(matrix);
@@ -315,7 +313,7 @@ public class Roll3DView extends View {
                     tAxisY = viewHeight;
                 if (tAxisY < 0)
                     tAxisY = 0;
-                //
+
                 camera.save();
                 camera.rotateX(-tDegree);
                 camera.getMatrix(matrix);
@@ -325,7 +323,6 @@ public class Roll3DView extends View {
                 matrix.postTranslate(currBitmap.getWidth() + i * averageWidth, tAxisY);
                 canvas.drawBitmap(currBitmap, matrix, paint);
 
-                //
                 camera.save();
                 camera.rotateX((90 - tDegree));
                 camera.getMatrix(matrix);
@@ -378,8 +375,6 @@ public class Roll3DView extends View {
             canvas.save();
             //注意 百叶窗的翻转方向和其他模式是相反的  横向的时候纵翻  纵向的时候横翻
             if (direction == 1) {
-                //
-
 
                 if (rotateDegree < 90) {
                     camera.save();
@@ -466,9 +461,9 @@ public class Roll3DView extends View {
     public void setRotateDegree(float rotateDegree) {//mark
         this.rotateDegree = rotateDegree;
         if (direction == 1) {
-            axisY = (float) rotateDegree / (float) (rollMode == RollMode.Jalousie ? 180 : 90) * viewHeight;
+            axisY = rotateDegree / (float) (rollMode == RollMode.Jalousie ? 180 : 90) * viewHeight;
         } else {
-            axisX = (float) rotateDegree / (float) (rollMode == RollMode.Jalousie ? 180 : 90) * viewWidth;
+            axisX =  rotateDegree / (float) (rollMode == RollMode.Jalousie ? 180 : 90) * viewWidth;
         }
         invalidate();
     }
@@ -567,7 +562,7 @@ public class Roll3DView extends View {
         valueAnimator.start();
     }
 
-    AnimatorListenerAdapter toNextAnimListener = new AnimatorListenerAdapter() {
+    private AnimatorListenerAdapter toNextAnimListener = new AnimatorListenerAdapter() {
 
 
         @Override
