@@ -159,7 +159,6 @@ public class Roll3DView extends View {
                 drawJalousie(canvas);
                 break;
         }
-
     }
 
 
@@ -200,8 +199,6 @@ public class Roll3DView extends View {
             matrix.preTranslate(-viewWidth / 2, -viewHeight);
             matrix.postTranslate(viewWidth / 2, axisY);
             canvas.drawBitmap(nextWholeBitmap, matrix, paint);
-
-            Log.d(TAG, "viewWidth = " + "  ,viewHeight = " + viewHeight + "  , viewHeight = " + "  ,viewHeight / (float) viewHeight = ");
 
         } else {
             camera.save();
@@ -458,7 +455,7 @@ public class Roll3DView extends View {
     }
 
 
-    public void setRotateDegree(float rotateDegree) {//mark
+    public void setRotateDegree(float rotateDegree) {
         this.rotateDegree = rotateDegree;
         if (direction == 1) {
             axisY = rotateDegree / (float) (rollMode == RollMode.Jalousie ? 180 : 90) * viewHeight;
@@ -603,7 +600,8 @@ public class Roll3DView extends View {
         }
 
         //rotateDegree == 0 说明curr在当前显示
-        //设置角度 nextIndex和currIndex 互换,显示next 使next显示当前的图片，然后完成翻转
+        //设置角度为90或180 nextIndex和currIndex preIndex轮转互换,使next显示到当前的图片，然后完成翻转
+        //可以通俗的理解为  先倒过来 再翻过去  只不过倒过来之前把图片也互换了 所以看不出来而已
         rollIndex(true);
         setRotateDegree(startRotate);
 
@@ -619,13 +617,13 @@ public class Roll3DView extends View {
         @Override
         public void onAnimationEnd(Animator animation) {
             super.onAnimationEnd(animation);
-            rollIndex(false);
+            rollIndex(false);//index位置恢复正常
             currIndex--;
             if (currIndex < 0)
                 currIndex = bitmapList.size() - 1;
             rolling = false;
             initIndex();
-            invalidate();
+            invalidate();//index位置修正之后刷新一下
 
         }
     };
