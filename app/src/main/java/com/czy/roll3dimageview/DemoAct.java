@@ -54,7 +54,7 @@ public class DemoAct extends Activity{
 
 
         roll3DView4.setRollMode(Roll3DView.RollMode.Jalousie);
-        roll3DView4.setPartNumber(5);
+        roll3DView4.setPartNumber(8);
         item4.setTitleText("百叶窗");
 
         roll3DView5.setRollMode(Roll3DView.RollMode.RollInTurn);
